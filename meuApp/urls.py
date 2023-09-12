@@ -3,13 +3,11 @@ from django.urls import path
 
 #importando tudo o que tem nas nossas views
 from .views import *
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('character/', CharacterAPIView.as_view(), name="character"),
-    path('character/<int:characterId>', CharacterAPIView.as_view(), name="characterById"),
-    path('location/', LocationAPIView.as_view(), name="location"),
-    path('location/<int:locationId>', LocationAPIView.as_view(), name="locationById"),
-    path('episode/', EpisodeAPIView.as_view(), name="episode"),
-    path('episode/<int:episodeId>', EpisodeAPIView.as_view(), name="episodeById"),
-]
+router = DefaultRouter()
+router.register(r'character', CharacterAPIView)
+router.register(r'location', LocationAPIView)
+router.register(r'episode', EpisodeAPIView)
 
+urlpatterns = router.urls
